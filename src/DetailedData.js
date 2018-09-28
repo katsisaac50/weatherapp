@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-
+import React, { Component } from 'react';
+import moment from 'moment';
 class DetailedData extends Component {
     constructor(){
         super();
@@ -14,7 +14,7 @@ class DetailedData extends Component {
         .then(data => {
       
           this.setState({data}) 
-          // console.log(data)
+          //console.log(data.consolidated_weather)
         });
 /*         this.getDayName = this.getDayName.bind(this);
  */    }
@@ -22,31 +22,13 @@ class DetailedData extends Component {
 /*
 * This function returns the Day Name
 * INPUT :    appDate : Date in mm-dd-yyyy format
-*   seperator: the date seperator
+*  using moment libray to get date
 */
  
 getDayName(appDate, seperator){
+  var dt = moment(appDate, "YYYY-MM-DD");
 
-
-  // Name of the days as Array
-  let dayNameArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thrusday", "Friday", "Saturday"];
-  let dateArr = appDate.split(seperator); // split the date into array using the date seperator
-  let year = dateArr[0];
-  let month = dateArr[1]; 
-  let day = dateArr[2];
-  
- // Calculate the total number of days, with taking care of leapyear 
- let totalDays = day + (2*month) + parseInt(3*(month+1)/5) + year + parseInt(year/4) - parseInt(year/100) + parseInt(year/400) + 2;
- console.log(totalDays%7)
- 
- // Mod of the total number of days with 7 gives us the day number
- let dayNo = (totalDays%7);
- // if the resultant mod of 7 is 0 then its Saturday so assign the dayNo to 7
- if(dayNo == 0){
-      dayNo = 7;
- }
-return dayNameArr[dayNo-1]; // return the repective Day Name from the array
-
+   return   dt.format('dddd')
 
 }
 

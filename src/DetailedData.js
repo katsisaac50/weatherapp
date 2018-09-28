@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import Displayicon from './component/weather icon';
 class DetailedData extends Component {
     constructor(){
         super();
@@ -43,10 +44,10 @@ getDayName(appDate, seperator){
         .map(forecastData=>
         
         <div>  
+        <Displayicon icon={forecastData.weather_state_abbr}/>
         <p>{Math.round(forecastData.the_temp)} &#8451;</p>
         <p>{this.getDayName(forecastData.applicable_date, "-")}</p>
         </div>)}
-        {this.props.woeid}
       </div>
     )
   }

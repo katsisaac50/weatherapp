@@ -10,7 +10,7 @@ class WeatherList extends Component {
   render() {
     const {locationData}=this.props
     if (!locationData)
-    return null
+    return null  
     return (
       <div>
       {locationData.map(city=>
@@ -19,7 +19,7 @@ class WeatherList extends Component {
         <p>{city.woeid}</p>
         </div> */
       
-        <WeatherUpdates key={city.title} city={city}/>
+       <WeatherUpdates key={city.title} city={city}/>
         
         )}
 

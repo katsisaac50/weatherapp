@@ -1,53 +1,70 @@
-import React, { Component } from 'react';
-import moment from 'moment';
-import Displayicon from './component/weather icon';
+import React, { Component } from 'react'
+import moment from 'moment'
+import Displayicon from './component/weather icon'
+
+var utc = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
 class DetailedData extends Component {
-    constructor(){
-        super();
-        this.state={}
-    }
-    //make an api request to fetch detailed data using /api/location/(woeid) end-point
-    componentDidMount(){
-      let url=`https://www.metaweather.com/api/location/${this.props.woeid}/`;
+  constructor () {
+    super()
+    this.state = {}
+  }
+  // make an api request to fetch detailed data using /api/location/(woeid) end-point
+  componentDidMount () {
+    let url = `https://www.metaweather.com/api/location/${this.props.woeid}/`
 
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-      
-          this.setState({data}) 
-          console.log(data)
-        });
-/*         this.getDayName = this.getDayName.bind(this);
- */    }
-      
-/*
-* This function returns the Day Name
-* INPUT :    appDate : Date in mm-dd-yyyy format
-*  using moment libray to get date
-*/
- 
-getDayName(appDate, seperator){
-  var dt = moment(appDate, "YYYY-MM-DD");
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
 
-   return   dt.format('dddd')
+        this.setState({data})
+        console.log(data)
+      })
+      /*         this.getDayName = this.getDayName.bind(this)
+       */    }
 
-}
+  /*
+  * This function returns the Day Name
+  * INPUT :    appDate : Date in mm-dd-yyyy format
+  *  using moment libray to get date
+  */
 
-  render() {
-    if(!this.state.data)
-    return null;
-   // {console.log(this.state.data)}
+  getDayName (appDate, seperator) {
+    var dt = moment(appDate, 'YYYY-MM-DD')
+
+    return dt.format('dddd')
+  }
+
+  render () {
+    if (!this.state.data)
+      return null
+    // {console.log(this.state.data)}
     return (
       <div>
-      <p>{this.state.data.parent.title}</p>
-      {this.state.data.consolidated_weather
-        .map(forecastData=>
-        
-        <div>  
-        <Displayicon icon={forecastData.weather_state_abbr}/>
-        <p>{Math.round(forecastData.the_temp)} &#8451;</p>
-        <p>{this.getDayName(forecastData.applicable_date, "-")}</p>
-        </div>)}
+        <div className='weatherToday'>
+          <p>
+            {this.props.title + ',' + '  ' + this.state.data.parent.title}
+          </p>
+          {this.state.data.consolidated_weather.filter(word => word.applicable_date === utc).map(forecastData => <div>
+                                                                                                                   <div></div>
+                                                                                                                   <Displayicon utc={utc} data={forecastData.applicable_date} icon={forecastData.weather_state_abbr} />
+                                                                                                                   <p>
+                                                                                                                     {Math.round(forecastData.the_temp)} ℃
+                                                                                                                   </p>
+                                                                                                                   <p>
+                                                                                                                     {this.getDayName(forecastData.applicable_date, '-')}
+                                                                                                                   </p>
+                                                                                                                 </div>)}
+        </div>
+        {this.state.data.consolidated_weather.filter(word => word.applicable_date !== utc)
+           .map(forecastData => <div>
+                                  <Displayicon utc={utc} data={forecastData.applicable_date}icon={forecastData.weather_state_abbr} />
+                                  <p>
+                                    {Math.round(forecastData.the_temp)} ℃
+                                  </p>
+                                  <p>
+                                    {this.getDayName(forecastData.applicable_date, '-')}
+                                  </p>
+                                </div>)}
       </div>
     )
   }

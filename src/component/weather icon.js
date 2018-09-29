@@ -6,9 +6,6 @@ function Displayicon (props) {
   let icon = props.icon
   console.log(props.data===props.utc)
   let className;
- /*  if (props.data.length <= 1) {
-    className += ' menu-active';
-  } */
 const iconClass = props.data===props.utc ? ' menu-active': 'weather-icon' 
   switch (icon) {
 

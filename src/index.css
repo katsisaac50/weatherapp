@@ -3,3 +3,19 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.weatherToday{
+  background-image: url("../src/assets/artwork.jpg");
+    background-color: #015276;
+    background-repeat: no-repeat;
+    background-size: auto;
+    height: 400px;
+}
+
+.weather-icon{
+  width: 64px;
+}
+
+.menu-active{
+  width: 250px;
+}

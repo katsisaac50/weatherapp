@@ -6,8 +6,7 @@ import DetailedData from './DetailedData';
       const {title,woeid}= this.props.city
     return (
       <div>
-        {title}
-        <DetailedData woeid={woeid} key={woeid}/>
+        <DetailedData title={title} woeid={woeid} key={woeid}/>
       </div>
     )
   }

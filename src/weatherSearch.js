@@ -10,6 +10,19 @@ class WeatherSearch extends Component {
     this.search = this.search.bind(this);
   }
 
+  componentDidMount () {
+    let url = `https://www.metaweather.com/api/location/search/?query=london`
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+
+        this.setState({
+          locationData: data,
+        })
+      })
+  }
+
   search() {
     const url = `https://www.metaweather.com/api/location/search/?query=${this.state.searchKeyword}`
 

@@ -6,7 +6,7 @@ import axios from 'axios';
 class WeatherSearch extends Component {
   constructor(props) {
     super(props);
-    this.state = { searchKeyword: "", isFirstTime: true };
+    this.state = { searchKeyword: ""};
     this.search = this.search.bind(this);
   }
 
@@ -37,9 +37,8 @@ class WeatherSearch extends Component {
   render() {
     const { searchKeyword,locationData, isFirstTime } = this.state;
     return (
-      <div className="App">
-        <div className="github">
-        <div className="search">
+     <div className="container">
+      <div className="search">
           <input
             placeholder="search for user"
             onChange={e => {
@@ -48,9 +47,11 @@ class WeatherSearch extends Component {
             value={searchKeyword}
           />
           <button onClick={this.search}>Search</button>
-          <WeatherList locationData={locationData} isFirstTime={isFirstTime} />
-        </div>
       </div>
+      <main className="main">
+        <WeatherList locationData={locationData} isFirstTime={isFirstTime} />
+
+      </main>
       </div>
     );
   }

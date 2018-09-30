@@ -19,14 +19,15 @@ class DetailedData extends Component {
         this.setState({data})
         console.log(data)
       })
-      /*         this.getDayName = this.getDayName.bind(this)
-       */    }
+      
+    }
 
   /*
   * This function returns the Day Name
   * INPUT :    appDate : Date in mm-dd-yyyy format
   *  using moment libray to get date
   */
+
 
   getDayName (appDate, seperator) {
     var dt = moment(appDate, 'YYYY-MM-DD')
@@ -39,13 +40,14 @@ class DetailedData extends Component {
       return null
     // {console.log(this.state.data)}
     return (
-      <div>
-        <div className='weatherToday'>
-          <p>
+      <div className='weatherToday'>
+        <div >
+        <div className='today'>
+          <h3 >
             {this.props.title + ',' + '  ' + this.state.data.parent.title}
-          </p>
-          {this.state.data.consolidated_weather.filter(word => word.applicable_date === utc).map(forecastData => <div>
-                                                                                                                   <div></div>
+          </h3>
+          {this.state.data.consolidated_weather.filter(word => word.applicable_date === utc).map(forecastData => <div className='today'>
+                                                                                                                
                                                                                                                    <Displayicon utc={utc} data={forecastData.applicable_date} icon={forecastData.weather_state_abbr} />
                                                                                                                    <p>
                                                                                                                      {Math.round(forecastData.the_temp)} ℃
@@ -55,8 +57,9 @@ class DetailedData extends Component {
                                                                                                                    </p>
                                                                                                                  </div>)}
         </div>
+                                                                                                                 </div>
         {this.state.data.consolidated_weather.filter(word => word.applicable_date !== utc)
-           .map(forecastData => <div>
+           .map(forecastData => <div className='otherDays'>
                                   <Displayicon utc={utc} data={forecastData.applicable_date}icon={forecastData.weather_state_abbr} />
                                   <p>
                                     {Math.round(forecastData.the_temp)} ℃

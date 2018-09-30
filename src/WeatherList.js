@@ -14,15 +14,9 @@ class WeatherList extends Component {
     return (
       <div>
       {locationData.map(city=>
-        /* <div>
-        <h1 key={city.title}>{city.title}</h1>
-        <p>{city.woeid}</p>
-        </div> */
-      
        <WeatherUpdates key={city.title} city={city}/>
         
         )}
-
       </div>
     )
   }

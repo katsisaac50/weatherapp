@@ -61,8 +61,8 @@ class DetailedData extends Component {
  */}                            
                                  <p>Humidity: {forecastData.humidity}%</p>
                                  <p>Wind speed: {forecastData.wind_speed.toFixed(1)} m/s</p>
-                                 <p>Humidity: {forecastData.max_temp.toFixed(1)}℃</p>
-                                 <p>Wind speed: {forecastData.min_temp.toFixed(1)} ℃</p>
+                                 <p>Max Temp: {forecastData.max_temp.toFixed(1)}℃</p>
+                                 <p>Min Temp: {forecastData.min_temp.toFixed(1)} ℃</p>
                                  </div>)}
       </aside>
       </div>

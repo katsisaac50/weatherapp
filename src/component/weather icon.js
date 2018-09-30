@@ -5,7 +5,6 @@ import { Img01, Img02, Img03, Img04, Img05, Img06, Img07, Img08, Img09, Img10 } 
 function Displayicon (props) {
   let icon = props.icon
   console.log(props.data===props.utc)
-  let className;
 const iconClass = props.data===props.utc ? ' menu-active': 'weather-icon' 
   switch (icon) {
 

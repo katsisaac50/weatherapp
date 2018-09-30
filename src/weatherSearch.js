@@ -53,13 +53,14 @@ class WeatherSearch extends Component {
      <div className="container">
       <div className="search">
           <input
-            placeholder="search for user"
+          class="search_4"
+            placeholder="enter city name"
             onChange={e => {
               this.setState({ searchKeyword: e.target.value });
             }}
             value={searchKeyword}
           />
-          <button onClick={this.search}>Search</button>
+          <button class="submit_4" onClick={this.search}>Search</button>
       </div>
       <main className="main">
         <WeatherList locationData={locationData} isFirstTime={isFirstTime} />

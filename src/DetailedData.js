@@ -38,47 +38,61 @@ class DetailedData extends Component {
       return null
     // {console.log(this.state.data)}
     return (
+      <main className="main">
       <div className='weatherToday'>
-          
-      <div>
-      <div className='today'>
-            <h3>{this.props.title + ',' + '  ' + this.state.data.parent.title}</h3>
+          <div className='today'>
+            <h3>{this.props.title + ',  ' + this.state.data.parent.title}</h3>
             {this.state.data.consolidated_weather.filter(word => word.applicable_date === utc)
-               .map(forecastData => <div className='today'>
+               .map(forecastData => <div key = {forecastData.id}>
                                       <Displayicon utc={utc} data={forecastData.applicable_date} icon={forecastData.weather_state_abbr} />
+                                      <p>{forecastData.weather_state_name}</p>
                                       <p className='temp'>
                                         {Math.round(forecastData.the_temp)} ℃
                                       </p>
                                       <p>
-                                        {this.getDayName(forecastData.applicable_date, '-')+', '+forecastData.applicable_date}
+                                        {this.getDayName(forecastData.applicable_date, '-') + ', ' + forecastData.applicable_date}
                                       </p>
                                     </div>)}
           </div>
-      
-      <aside className='aside'>
-      {this.state.data.consolidated_weather.filter(word => word.applicable_date === utc).map(forecastData => <div className='today'>
-{/*                                <Displayicon utc={utc} data={forecastData.applicable_date} icon={forecastData.weather_state_abbr} />
- */}                            
-                                 <p>Humidity: {forecastData.humidity}%</p>
-                                 <p>Wind speed: {forecastData.wind_speed.toFixed(1)} m/s</p>
-                                 <p>Max Temp: {forecastData.max_temp.toFixed(1)}℃</p>
-                                 <p>Min Temp: {forecastData.min_temp.toFixed(1)} ℃</p>
-                                 </div>)}
-      </aside>
-      </div>
-      
+          
+            {this.state.data.consolidated_weather.filter(word => word.applicable_date === utc)
+               .map(forecastData => <aside className='aside' key = {forecastData.id}>
+                                      <p>
+                                        Humidity:
+                                        {forecastData.humidity}%
+                                      </p>
+                                      <p>
+                                        Wind speed:
+                                        {forecastData.wind_speed.toFixed(1)} m/s
+                                      </p>
+                                      <p>
+                                        Max Temp:
+                                        {forecastData.max_temp.toFixed(1)}℃
+                                      </p>
+                                      <p>
+                                        Min Temp:
+                                        {forecastData.min_temp.toFixed(1)} ℃
+                                      </p>
+                                      </aside>)}
+  
+        </div>
+        <div className='text-center'>
         {this.state.data.consolidated_weather.filter(word => word.applicable_date !== utc)
-           .map(forecastData => <div className='otherDays'>
+           .map(forecastData => 
+                                  <div className='otherDays ' key = {forecastData.id}>
+                                  <p>{forecastData.weather_state_name}</p>
                                   <Displayicon utc={utc} data={forecastData.applicable_date} icon={forecastData.weather_state_abbr} />
-                                  <p>
-                                    {Math.round(forecastData.the_temp)} ℃
-                                  </p>
-                                  <p>
-                                    {this.getDayName(forecastData.applicable_date, '-')}
-                                  </p>
-                                </div>)}
-      </div>
-    )
+                                    <p>
+                                      {Math.round(forecastData.the_temp)} ℃
+                                    </p>
+                                    <p>
+                                      {this.getDayName(forecastData.applicable_date, '-')}
+                                    </p>
+                                  </div>
+                                  
+                                )}
+                                </div>  
+      </main>)
   }
 }
 export default DetailedData

@@ -32,10 +32,5 @@ const iconClass = props.data===props.utc ? ' menu-active': 'weather-icon'
   return <p>No icon to display</p>
 }
 
-  console.log(props.icon)
-
-  return <div>
-           Search For User
-         </div>
 }
 export default Displayicon

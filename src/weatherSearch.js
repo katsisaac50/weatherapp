@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import WeatherList from './WeatherList';
 import './App.css';
-import axios from 'axios';
-
 class WeatherSearch extends Component {
   constructor(props) {
     super(props);
-    this.state = { searchKeyword: ""};
+    this.state = { searchKeyword: "",loading: true};
     this.search = this.search.bind(this);
   }
 
   componentDidMount () {
-    let url = `https://www.metaweather.com/api/location/search/?query=london`
+    let url = `https://www.metaweather.com/api/location/search/?query=copenhagen`
 
     fetch(url)
       .then(response => response.json())
@@ -37,7 +35,7 @@ class WeatherSearch extends Component {
     .then(response => response.json())
     // ...then we update the users state
     .then(data =>{
-      console.log(data),
+      console.log(data);
       this.setState({
         locationData: data,
         isLoading: false,
@@ -48,24 +46,26 @@ class WeatherSearch extends Component {
   }
 
   render() {
-    const { searchKeyword,locationData, isFirstTime } = this.state;
+    const { loading,searchKeyword,locationData, isFirstTime } = this.state;
+    if(!loading) { // if your component doesn't have to wait for an async action, remove this block 
+      return null; // render null when app is not ready
+    }
     return (
-     <div className="container">
+     <div >
       <div className="search">
           <input
-          class="search_4"
+          className="search_4"
             placeholder="enter city name"
             onChange={e => {
               this.setState({ searchKeyword: e.target.value });
             }}
             value={searchKeyword}
           />
-          <button class="submit_4" onClick={this.search}>Search</button>
+          <button className="submit_4" onClick={this.search}>Search</button>
       </div>
-      <main className="main">
+      
         <WeatherList locationData={locationData} isFirstTime={isFirstTime} />
 
-      </main>
       </div>
     );
   }

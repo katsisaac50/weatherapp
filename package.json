@@ -2,7 +2,6 @@
   "name": "weatherapp",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://www.metaweather.com",
   "dependencies": {
     "axios": "^0.18.0",
     "cors": "^2.8.4",
@@ -13,6 +12,14 @@
     "react-scripts": "1.1.5",
     "rimraf": "^2.6.2"
   },
+  "proxy": {
+    "/api": {
+      "target": "https://www.metaweather.com",
+      "ws": true
+    
+    }
+  },
+
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
